@@ -2,7 +2,7 @@ package com.example.BFS;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
-
+//200
 public class NumberOfIslands {
 
 	int[][] directions = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
