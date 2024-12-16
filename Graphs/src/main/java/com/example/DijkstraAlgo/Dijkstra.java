@@ -41,7 +41,8 @@ public class Dijkstra {
 
 		@Override
 		public int compareTo(Pair p2) {	
-			return this.dist - p2.dist;
+			return this.dist - p2.dist;// ascending
+			// return p2.dist - this.dist; descending order
 		}
 	}
 	
