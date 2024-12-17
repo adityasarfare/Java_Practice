@@ -12,12 +12,17 @@ public class NetworkDelayTime3 {
 public int networkDelayTime(int[][] times, int n, int k) {
         Map<Integer, List<int[]>> edge = new HashMap<>();
         
-        for(int time[] : times) {
-        	edge.putIfAbsent(time[0], new ArrayList<>());
-        }
+//        for(int time[] : times) {
+//        	edge.putIfAbsent(time[0], new ArrayList<>());
+//        }
+//        
+//        for(int time[] : times) {
+//        	edge.get(time[0]).add(new int[] {time[1], time[2]});
+//        }
         
-        for(int time[] : times) {
-        	edge.get(time[0]).add(new int[] {time[1], time[2]});
+        
+        for(int[] time : times) {
+        	edge.computeIfAbsent(time[0], key-> new ArrayList<>()).add(new int[] {time[1], time[2]});
         }
         
         PriorityQueue<int[]> pq = new PriorityQueue<>(
@@ -49,13 +54,11 @@ public int networkDelayTime(int[][] times, int n, int k) {
         }
         
         for(int i=0; i< n; i++) {
-        	if(!vis[i]) {
-        		return -1;
+        	if(vis[i]) {
+        		return finalTime;
         	}
-        	else {
-        	return 	finalTime;
-        	}
-        }
+       }
+        return -1;
     }
 	
 }
