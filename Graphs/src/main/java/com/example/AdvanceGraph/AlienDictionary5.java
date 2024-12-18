@@ -1,6 +1,8 @@
 package com.example.AdvanceGraph;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,10 +39,35 @@ public class AlienDictionary5 {
 			
 			vis = new HashMap<>();
 			res = new ArrayList<>();
-			
-			
+			for(char c : adj.keySet()) {
+				if(dfs(c)) {
+					return "";
+				}
+			}	
 		}
 		
-	return ""; 	
+		Collections.reverse(res);
+		StringBuilder sb = new StringBuilder();
+		for(char ch : res) {
+			sb.append(ch);
+		}
+		return sb.toString(); 	
+	}
+
+	private boolean dfs(char c) {
+		if(vis.containsKey(c)) {
+			return vis.get(c);
+		}
+		
+		vis.put(c, true);
+		for(char ch: adj.get(c)) {
+			if(dfs(ch)) {
+				return true;
+			}
+		}
+		
+		vis.put(c, false);
+		res.add(c);
+		return false;
 	}
 }
