@@ -2,6 +2,8 @@ package com.example.dp;
 
 import java.util.Arrays;
 
+
+//https://takeuforward.org/data-structure/dynamic-programming-frog-jump-dp-3/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 public class FrogJump3 {
 
 	//Memoization
@@ -13,8 +15,8 @@ public class FrogJump3 {
 	  
 	  return dfs(n-1, stones, dp);
 	  
-    }
-
+    }                                    
+                          
 	private int dfs(int n, int[] stones, int[] dp) {
 	
 		if(n==0) {

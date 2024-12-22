@@ -55,27 +55,31 @@ public class MaximumSumOfNonAdjacentElements5 {
 		for(int i=1; i<n; i++) {
 			
 			
-		    int  pick = arr[i] + (i>1? dp[i-2] : 0);
-			
-			int nopick = 0 + arr[i-1];
+		    int  pick = arr[i];
+		    if(i>1) {
+		    pick += dp[i-2]; 
+		    }
+			int nopick = 0 + dp[i-1];
 			dp[i] = Math.max(pick, nopick);
 		}
 		return dp[n-1];
 	}
 	
-	private static int solve3(int n, int[] arr) {
-		int [] dp = new int [n];
-		dp[0] =arr[0];
+	private static int solve2(int n, int[] arr) {
 		
-		for(int i=1; i<n; i++) {
+		int prev = arr[1];
+		int prev2 =arr[0];
+		
+		for(int i=2; i<n; i++) {
+			int pick = arr[i] + (i>1? prev2 :0);
+			int nonpick = 0 + prev;
 			
-			
-		    int  pick = arr[i] + (i>1? dp[i-2] : 0);
-			
-			int nopick = 0 + arr[i-1];
-			dp[i] = Math.max(pick, nopick);
+			int curr = Math.max(pick, nonpick);
+			prev2 = prev;
+			prev = curr;
+		   
 		}
-		return dp[n-1];
+		return prev;
 	}
 	
 	

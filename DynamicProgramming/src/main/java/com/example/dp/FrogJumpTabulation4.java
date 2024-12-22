@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class FrogJumpTabulation4 {
 
-	//Memoization
+	//Tabulation
   public static int maxJump(int[] stones, int k) {
         
 	  int n= stones.length;
