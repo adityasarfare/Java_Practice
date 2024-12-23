@@ -39,7 +39,6 @@ public class HouseRobberII7 {
 			
 			for(int i=1; i<n; i++) {
 				
-				
 			    int  pick = list.get(i) + (i>1? dp[i-2] : 0);
 				
 				int nopick = 0 + dp[i-1];
