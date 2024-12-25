@@ -13,6 +13,7 @@ public class MinimumFallingPathSum13 {
         // Call the getMaxPathSum function and print the result
         System.out.println(getMaxPathSum(matrix));
         System.out.println(getMaxPathSumTabulation(matrix));
+        System.out.println(getMaxPathSumSpaceOptimization(matrix));
     }
 
 	
@@ -55,7 +56,7 @@ public class MinimumFallingPathSum13 {
 		return dp[i][j] = Math.max(straight, (Math.max(leftdiag, rightdiag)));
 	}
 	
-	 private static char[] getMaxPathSumTabulation(int[][] matrix) {
+	 private static int getMaxPathSumTabulation(int[][] matrix) {
 		
 		 int n = matrix.length;
 		 int m = matrix[0].length;
@@ -69,21 +70,73 @@ public class MinimumFallingPathSum13 {
 			 
 			 for(int j =0; j<m ; j++) {
 				 
-				 int straight =0;
-				 int leftdiag = 0;
-				 int rightdiag =0;
-				 
-			     straight = matrix[i][j] + dp[i-1][j];
-				
+			     int straight = matrix[i][j] + dp[i-1][j];
+			     int leftdiag = matrix[i][j];
 			     if(j-1>=0) {
-			     leftdiag = matrix[i][j] + dp[i-1][j-1];
+			     leftdiag +=dp[i-1][j-1];
 			     }else {
-			    	 
+			    	 leftdiag += (int) Math.pow(-10, 9);
 			     }
-			     straight = matrix[i][j] + dp[i-1][j];
+			     int rightdiag = matrix[i][j];
+			     if(j+1<m) {
+			    	rightdiag += dp[i-1][j+1]; 
+			     }else {
+			    	 rightdiag += (int) Math.pow(-10, 9);
+			     }
+			     dp[i][j] =Math.max(straight, Math.max(leftdiag, rightdiag));
 				 }
+		
 			 }
 		 
-		return null;
+		 int max = Integer.MIN_VALUE;
+		 for(int j=0; j<m; j++) {
+			 max = Math.max(max, dp[n-1][j]);
+		 }
+		 
+		return max;
 	 }
-}
+	 
+	 private static int getMaxPathSumSpaceOptimization(int[][] matrix) {
+		 int n = matrix.length;
+		 int m = matrix[0].length;
+		 
+		int [] prev = new int[m];
+		int [] cur = new int[m];
+		
+		for(int j=0; j<m; j++) {
+			prev[j] = matrix[0][j];
+		}
+		
+		
+            for(int i=1; i<n; i++) {
+			 
+			 for(int j =0; j<m ; j++) {
+				
+				 int straight = matrix[i][j] + prev[j];
+				 int leftdiag = matrix[i][j];
+				 if(j-1>=0) {
+				     leftdiag +=prev[j-1];
+				     }else {
+				    leftdiag += (int) Math.pow(-10, 9);
+				     }
+				 int rightdiag = matrix[i][j];
+				 if(j+1<m) {
+				    	rightdiag += prev[j+1]; 
+				     }else {
+				    	 rightdiag += (int) Math.pow(-10, 9);
+				     }
+				 
+				 cur[j] = Math.max(straight, Math.max(leftdiag, rightdiag));
+			 }
+			 
+			 prev = cur.clone();
+			 }
+            int max = Integer.MIN_VALUE;
+   		 for(int j=0; j<m; j++) {
+   			 max = Math.max(max, prev[j]);
+   		 }
+   		 
+   		return max;
+	
+	 }
+	 }
