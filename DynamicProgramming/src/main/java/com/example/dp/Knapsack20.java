@@ -31,7 +31,7 @@ public class Knapsack20 {
 		
 		int notTaken = dfs(i-1, maxWeight, weight, value, dp);
 		
-		int taken = Integer.MAX_VALUE;
+		int taken = Integer.MIN_VALUE;
 		if(weight[i]<= maxWeight) {
 			taken = value[i] +dfs(i-1, maxWeight - weight[i], weight, value, dp);
 		}
@@ -55,7 +55,7 @@ public class Knapsack20 {
 	    			 int notTaken = dp[i-1][W];
 	    				
 	    				int taken = 0;
-	    				if(weight[i]<= maxWeight) {
+	    				if(weight[i]<= W) {
 	    					taken =  value[i] +dp[i-1][ W - weight[i]];
 	    				}
 	    				return dp[i][W] = Math.max(taken, notTaken);	
@@ -65,4 +65,62 @@ public class Knapsack20 {
 	    	 return dp[n-1][maxWeight];
 	}
 
+	     
+	     static int knapsackSpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
+	    	 int prev[] = new int[maxWeight+1];
+	    	 int curr[] = new int[maxWeight+1];
+	    	 
+	    	 for (int W = 0; W <= maxWeight; W++) {
+	    	        if (weight[0] <= W) {
+	    	            prev[W] = value[0];
+	    	        }
+	    	    }
+	    	 
+	    	 for(int i=1; i<n;i++) {
+	    		 
+	    		 for(int W=1; W<=maxWeight; W++) {
+	    			
+	    			 int notTaken = prev[W];
+	    				
+	    				int taken = 0;
+	    				if(weight[i]<= W) {
+	    					taken =  value[i] + prev[ W - weight[i]];
+	    				}
+	    				return curr[W] = Math.max(taken, notTaken);	
+	    		 }
+	    		 
+	    		 prev = curr.clone();
+	    	 }
+	    	 
+	    	 return prev[maxWeight];
+	}
+
+	     static int knapsackSingleSpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
+	    	 int prev[] = new int[maxWeight+1];
+	    	
+	    	 
+	    	 for (int W = 0; W <= maxWeight; W++) {
+	    	        if (weight[0] <= W) {
+	    	            prev[W] = value[0];
+	    	        }
+	    	    }
+	    	 
+	    	 for(int i=1; i<n;i++) {
+	    		 
+	    		 for(int W=maxWeight; W>=0; W++) {
+	    			
+	    			 int notTaken = prev[W];
+	    				
+	    				int taken = 0;
+	    				if(weight[i]<= W) {
+	    					taken =  value[i] + prev[ W - weight[i]];
+	    				}
+	    				return prev[W] = Math.max(taken, notTaken);	
+	    		 }
+	    		 
+	  
+	    	 }
+	    	 
+	    	 return prev[maxWeight];
+	}
 }
