@@ -33,6 +33,8 @@ public class CountSubsetswithSumK18 {
 			return 1;
 		}
 		
+		
+		
 		if(i ==0) {
 			if(arr[i]== target) {
 				return 1;
@@ -41,6 +43,16 @@ public class CountSubsetswithSumK18 {
 				return 0;
 			}
 		}
+		
+//		if(i ==0) {
+//			if(target ==0 && arr[0] == 0) {
+//				return 2;
+//			}
+//			
+//			if(target==0 || arr[0] == target ) {
+//				return 1;
+//			}
+//		}
 		
 		if(dp[i][target]!=-1) {
 			return dp[i][target];
