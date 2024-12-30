@@ -67,7 +67,7 @@ public class PrintLongestCommonSubsequence2 {
 				i--;
 				j--;
 			}
-			else if(ss.charAt(i-1)> text2.charAt(j-1)){
+			else if(dp[i-1][j]> dp[i][j-1]){
 				
 				i = i-1;
 			}else {
