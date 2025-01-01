@@ -119,33 +119,32 @@ public class WildcardMatchingRegularExpressionMatching {
 
 		prev[0] = true;
 
-
 		for (int i = 1; i <= n; i++) {
-			boolean flag = true;
-			for (int k = 1; k <= i; k++) {
-				if (pattern.charAt(k) != '*') {
-					flag = false;
-					break;
-				}
-			}
-
-			dp[i][0] = flag;
-		}
-
-		for (int i = 1; i <= n; i++) {
+			cur[0] = isAllStars(pattern, i);
 			for (int j = 1; j <= m; j++) {
 
 				if (pattern.charAt(i - 1) == text.charAt(j - 1) || pattern.charAt(i - 1) == '?') {
-					dp[i][j] = dp[i - 1][j - 1];
+					cur[j] = prev[j - 1];
 				} else if (pattern.charAt(i - 1) == '*') {
 
-					dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+					cur[j] = prev[j] || cur[j - 1];
 				} else {
-					dp[i][j] = false;
+					cur[j] = false;
 				}
 			}
+			prev = cur.clone();
 		}
 
-		return dp[n][m];
+		return prev[m];
+	}
+
+
+
+	private static boolean isAllStars(String pattern, int i) {
+		for (int j = 1; j <= i; j++) {
+		      if (pattern.charAt(j - 1) != '*')
+		        return false;
+		    }
+		    return true;
 	}
 }
