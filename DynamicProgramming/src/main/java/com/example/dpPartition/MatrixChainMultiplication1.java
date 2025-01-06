@@ -16,8 +16,10 @@ public class MatrixChainMultiplication1 {
 		System.out.println("The minimum number of operations are "+
 		        matrixMultiplicationMemoization(arr,n));
 		
+		System.out.println("The minimum number of operations are "+
+		        matrixMultiplicationTabulation(arr,n));
+		
 	}
-
 
 	private static int matrixMultiplication(int[] arr, int n) {
 		
@@ -74,5 +76,33 @@ public class MatrixChainMultiplication1 {
 			dp[i][j] = min;
 		}
 		return min;
+	}
+	
+	private static int matrixMultiplicationTabulation(int[] arr, int n) {
+		
+		int dp[][]= new int[n][n];
+		
+		for (int row[] : dp) {
+            Arrays.fill(row, -1);
+        }
+		for(int i=0; i<n; i++) {
+			dp[i][i]=0;
+		}
+		
+		for(int i= n-1; i>=1; i--) {
+			for(int j = i+1; j<=n-1; j++) {
+				
+				int min = Integer.MAX_VALUE;
+				
+				for(int k=i; k<=j-1; k++) {
+					int steps = dp[i][k] + dp[k+1][j] + arr[i-1] * arr[k] * arr[j];
+					min = Math.min(min, steps);
+				}
+				
+				dp[i][j] = min;
+			}
+		}
+		
+		return dp[1][n-1];
 	}
 }
