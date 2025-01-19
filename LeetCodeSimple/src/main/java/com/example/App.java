@@ -12,47 +12,24 @@ import java.util.Map;
  */
 public class App {
 
-	 public List<List<Integer>> threeSum(int[] nums) {
-		 Arrays.sort(nums);
-		 
-		 List<List<Integer>> res = new ArrayList<>();
-		 for(int i=0; i<nums.length; i++) {
-			 if(nums[i]>0) {
-				 break;
-			 }
-			 if(i>0 && nums[i]==nums[i-1]) {
-				 continue;
-			 }
-			 
-			 int li =i+1;
-			 int hi = nums.length -1;
-			 
-			 while(li<=hi) {
-				 int sum = nums[i]+ nums[li] + nums[hi];
-				 
-				 if(sum<0) {
-					 li++;
-				 }
-				 else if(sum>0) {
-					 hi--;
-				 }
-				 else {
-					 if(sum ==0) {
-						res.add(Arrays.asList(nums[i], nums[li], nums[hi]));
-						li++;
-						hi--;
-						
-						while(li <hi && nums[i]==nums[i-1]) {
-							li++;
-						}
-					 }
-					 }
-			 }
-		 }
-		 
-		 return res;
-	 }
+	public class ContainerWithMostWater4 {
+		public int maxArea(int[] heights) {
+	        int maxRes =0;
+	        int li=0;
+	        int hi=heights.length-1;
 
+	        while(li < hi){
+	            if(heights[li] < heights[hi]){
+	            maxRes= Math.max(maxRes, heights[li] * (hi-li));
+	               li++; 
+	            }else
+	            {
+	            maxRes= Math.max(maxRes, heights[hi] * (hi-li));
+	            hi--;
+	            }
+	        }
+	        return maxRes;
+	    }
 
     public static void main( String[] args )
     {
