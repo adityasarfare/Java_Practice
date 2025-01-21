@@ -30,6 +30,7 @@ public class App {
 	        }
 	        return maxRes;
 	    }
+		}
 
     public static void main( String[] args )
     {

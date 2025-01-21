@@ -1,6 +1,6 @@
 package com.example.SlidingWindow;
 
-public class BestTimetoBuyAndSellStock {
+public class BestTimetoBuyAndSellStock1 {
 
 	public int maxProfit(int[] prices) {
 

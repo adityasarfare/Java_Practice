@@ -1,6 +1,6 @@
 package com.example.TwoPointers;
 
-public class TrapingRainWater {
+public class TrapingRainWater5 {
 
 	 public int trap(int[] height) {
 		  if(height == null || height.length ==0){
