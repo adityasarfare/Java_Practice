@@ -2,13 +2,13 @@ package com.demo.concurrency;
 
 class SharedResources{
 	
-	public   boolean flag = false;
+	public  volatile boolean flag = false;
 
-	public synchronized boolean isFlag() {
+	public  boolean isFlag() {
 		return flag;
 	}
 
-	public synchronized void setFlag(boolean flag) {
+	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
 	

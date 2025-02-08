@@ -18,8 +18,8 @@ public class DaemonThreadExample {
         daemonThread.start();
 
         try { 
-        	Thread.sleep(2000); 
-        } catch (InterruptedException e) {
+        	Thread.sleep(5000); 
+        } catch (Exception e) {
         	
         }
 

@@ -2,13 +2,13 @@ package com.demo.concurrency;
 
 class SharedResources1{
 	
-	public  volatile boolean flag = false;
+	public   boolean flag = false;
 
-	public boolean isFlag() {
+	public synchronized boolean isFlag() {
 		return flag;
 	}
 
-	public void setFlag(boolean flag) {
+	public synchronized void setFlag(boolean flag) {
 		this.flag = flag;
 	}
 	
@@ -35,7 +35,7 @@ public class VisibilityProblemUsingSynchronized {
 	
 	
 	new Thread(() -> {
-		System.out.println("Thread 2 started");
+		System.out.println("Thread 2 logic started");
 		
 		while(!sr.isFlag()) {
 			

@@ -16,6 +16,8 @@ public static void main(String[] args) {
 		userIdThrealLocal.remove();
 		System.out.println("Removed thread 1" + userIdThrealLocal.get());
 	});
+	 
+	System.out.println("Hiiiii" +userIdThrealLocal.get()); 
 	
 	Thread t2 = new Thread(() -> {
 		System.out.println("Thread 2 started for" + userId2);
