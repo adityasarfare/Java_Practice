@@ -1,12 +1,13 @@
 package com.demo.streams;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StreamsExample {
+public class StreamsExample1 {
 
 	public static void main(String[] args) {
 		
@@ -66,8 +67,23 @@ public class StreamsExample {
 //				System.out.println(countProductByCategory);
 				
 //   Filtering: Products with price greater than 50;
-		var filteredProducts = products.filter(product -> product.price>700).collect(Collectors.toList());
-		System.out.println(filteredProducts);
+//	    var filteredProducts = products.filter(product -> product.price>700).collect(Collectors.toList());
+//	    System.out.println(filteredProducts);
+		
+//   Mapping: Extracting Product Names
+//		var extractProductCategories = products.map(Product::category).collect(Collectors.toList());
+//		System.out.println(extractProductCategories);
 	
+//   Partiotioning: Separate Products into expensive and cheap
+//		var partionProducts = products.collect(Collectors.partitioningBy(product -> product.price > 700));
+//		System.out.println(partionProducts);
+
+	//Summarize :Summary Statistics for product prices
+	// sum, avergae, max, min, count(5 metrices)
+	Map<String, IntSummaryStatistics> summaryStatisticsByCategory =
+			products.collect(Collectors.groupingBy(Product::category, 
+					Collectors.summarizingInt(Product::price)));
+
+        System.out.println(summaryStatisticsByCategory);
 	}
 }
